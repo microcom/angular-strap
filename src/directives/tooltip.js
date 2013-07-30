@@ -2,12 +2,42 @@
 
 angular.module('$strap.directives')
 
-.directive('bsTooltip', function($parse, $compile) {
+.directive('bsTooltip', function($parse, $compile, $strapConfig) {
 
   return {
     restrict: 'A',
     scope: true,
     link: function postLink(scope, element, attrs, ctrl) {
+      var options = angular.extend(
+        {
+          title: function() { return angular.isFunction(value) ? value.apply(null, arguments) : value; },
+          html: true
+        },
+        $strapConfig.tooltip
+      );
+
+      angular.forEach(
+        [
+          'animation',
+          'html',
+          'placement',
+          'selector',
+          'trigger',
+          'delay',
+          'container'
+        ],
+        function (key) {
+          if (angular.isDefined(attrs[key])) {
+            if (attrs[key] === 'true' || attrs[key] === 'false') {
+              options[key] = (attrs[key] === 'true');
+            } else if (/^\-?([0-9]+|Infinity)$/.test(attrs[key])) {
+              options[key] = parseInt(attrs[key], 10);
+            } else {
+              options[key] = attrs[key];
+            }
+          }
+        }
+      );
 
       var getter = $parse(attrs.bsTooltip),
         setter = getter.assign,
@@ -34,10 +64,7 @@ angular.module('$strap.directives')
       }
 
       // Initialize tooltip
-      element.tooltip({
-        title: function() { return angular.isFunction(value) ? value.apply(null, arguments) : value; },
-        html: true
-      });
+      element.tooltip(options);
 
       // Bootstrap override to provide events & tip() reference
       var tooltip = element.data('tooltip');
