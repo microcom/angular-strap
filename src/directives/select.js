@@ -2,7 +2,7 @@
 
 angular.module('$strap.directives')
 
-.directive('bsSelect', function($timeout) {
+.directive('bsSelect', function($timeout, $strapConfig) {
 
   var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w\d]*)|(?:\(\s*([\$\w][\$\w\d]*)\s*,\s*([\$\w][\$\w\d]*)\s*\)))\s+in\s+(.*)$/;
 
@@ -12,6 +12,27 @@ angular.module('$strap.directives')
     link: function postLink(scope, element, attrs, controller) {
 
       var options = scope.$eval(attrs.bsSelect) || {};
+      angular.extend(options, $strapConfig.select);
+
+      angular.forEach(
+        [
+          'container',
+          'hideDisabled',
+          'selectedTextFormat',
+          'countSelectedText',
+          'size',
+          'showSubtext',
+          'showIcon',
+          'style',
+          'title',
+          'width'
+        ],
+        function (key) {
+          if (angular.isDefined(attrs[key])) {
+            options[key] = attrs[key];
+          }
+        }
+      );
 
       $timeout(function() {
         element.selectpicker(options);
