@@ -1,6 +1,15 @@
 'use strict';
 
-angular.module('$strap.directives')
+/**
+ * @ngdoc service
+ * @name $strap.services:$modal
+ * @description
+ *
+ * ### A modal widget service based on Twitter Bootstrap.
+ *
+ */
+
+angular.module('$strap.services')
 
 .factory('$modal', function($rootScope, $compile, $http, $timeout, $q, $templateCache, $strapConfig) {
 
@@ -72,8 +81,55 @@ angular.module('$strap.directives')
   };
 
   return ModalFactory;
+});
 
-})
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-modal
+ * @element div
+ * @restrict A
+ * @description
+ *
+ * ### A modal widget directive based on Twitter Bootstrap.
+ *
+ * Fetches an external html partial (or an inline ng-template) and populates the modal with its content.
+ *
+ * Use any button/link to trigger a modal by appending a bs-modal attribute.
+ *
+ * Both $scope.show(), $scope.hide() & $scope.$modal() are available inside the modal to toggle its visibility.
+ *
+ * #### Examples
+ *
+ * <pre>
+<!-- Button to trigger modal -->
+<button type="button" class="btn" bs-modal="'partials/modal.html'">...</button>
+
+<!-- Modal (external ./partials/modal.html or inline ng-template) -->
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3>Modal header</h3>
+</div>
+<div class="modal-body">
+  <p>{{modal.content}}</p>
+  <br />
+  <pre>2 + 3 = {{ 2 + 3 }}</pre>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn" ng-click="hide()">Close</button>
+  <button class="btn btn-primary" ng-click="modal.saved=true;hide()">Save changes</button>
+</div>
+ * </pre>
+ *
+ * @param {string} modal-class Class to add to the modal. Default: ''
+ * @param {boolean|"static"} backdrop Includes a modal-backdrop element. Alternatively, specify static for a backdrop which doesn't close the modal on click. Default: true
+ * @param {boolean} keyboard Closes the modal when escape key is pressed. Default: true
+ * @param {boolean} show Default: true
+ * @param {string} template Path to the template file to use. Default: ''
+ * @param {string} bs-modal Same as template. Path to the template file to use. Default: ''
+ *
+ */
+
+angular.module('$strap.directives')
 
 .directive('bsModal', function($q, $modal) {
 
@@ -90,8 +146,8 @@ angular.module('$strap.directives')
       };
 
       // $.fn.datepicker options
-      angular.forEach(['modalClass', 'backdrop', 'keyboard'], function(key) {
-        if(angular.isDefined(iAttrs[key])) options[key] = iAttrs[key];
+      angular.forEach(['modalClass', 'backdrop', 'keyboard', 'show'], function(key) {
+        if (angular.isDefined(iAttrs[key])) options[key] = iAttrs[key];
       });
 
       $q.when($modal(options)).then(function onSuccess(modal) {
