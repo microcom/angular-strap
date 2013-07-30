@@ -1,5 +1,22 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-button
+ * @element button
+ * @restrict A
+ * @description
+ *
+ * ### A button widget directive based on Twitter Bootstrap
+ *
+ * #### Usage
+ *
+ * Add to a button element to link it with a scope object.
+ *
+ * @param {expression} ng-model Scope object linked to button status.
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsButton', function($parse, $timeout) {
@@ -97,6 +114,23 @@ angular.module('$strap.directives')
 
 })
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-buttons-checkbox
+ * @element div
+ * @restrict A
+ * @description
+ *
+ * ## A checkbox button widget directive based on Twitter Bootstrap
+ *
+ * #### Usage
+ *
+ * Add to a div.btn-group element containing buttons to link the buttons to a scope object representing the status of every button. The behaviour of every button is of a single checkbox.
+ *
+ * The ng-model directive must be defined on the children.
+ *
+ */
+
 .directive('bsButtonsCheckbox', function($parse) {
 
   return {
@@ -110,6 +144,23 @@ angular.module('$strap.directives')
   };
 
 })
+
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-buttons-radio
+ * @element div
+ * @restrict A
+ * @description
+ *
+ * ## A radio button widget directive based on Twitter Bootstrap
+ *
+ * #### Usage
+ *
+ * Add to a div.btn-group element containing buttons to link the buttons to a scope object representing the status of every button. The behaviour is that of a radio buttons group.
+ *
+ *  The ng-model directive can be defined on the children but if it is on the parent, it will put the single selected value in this element.
+ *
+ */
 
 .directive('bsButtonsRadio', function($timeout) {
 

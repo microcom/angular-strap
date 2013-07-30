@@ -1,5 +1,23 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-buttons-select
+ * @element button
+ * @restrict A
+ * @description
+ *
+ * ### A switchable button widget directive based on Twitter Bootstrap
+ *
+ * #### Usage
+ *
+ * Add to a button element to change the content of that element.
+ *
+ * @param {array} bs-button-select Array containing strings that will be cycled through.
+ * @param {expression} ng-model Scope expression where to put the string selected.
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsButtonSelect', ['$parse', '$timeout', function($parse, $timeout) {

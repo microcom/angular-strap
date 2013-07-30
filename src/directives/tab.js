@@ -1,5 +1,26 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-tab
+ * @element div
+ * @restrict A
+ * @description
+ *
+ * ### A tab widget directive based on Twitter Bootstrap
+ *
+ * Create tabs interfaces by appending a bs-tabs attribute to a div container.
+ *
+ * #### Example
+ *
+ * <pre>
+<div data-fade="1" ngModel="activeTab" bs-tabs>
+  <div ng-repeat="tab in tabs" data-title="{{tab.title}}"><p>{{tab.content}}</p></div>
+</div>
+ * </pre>
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsTabs', function($parse, $compile, $timeout) {

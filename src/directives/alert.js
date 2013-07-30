@@ -1,5 +1,40 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-alert
+ * @element div
+ * @restrict A
+ * @description
+ *
+ * ### An alert widget directive based on Twitter Bootstrap
+ *
+ * #### Usage
+ *
+ * Add to a div element to convert it as an alert. It must be linked with a scope object containing a type (either info, warning or error), a title and a content.
+ *
+ * You can use a button with data-dismiss="alert" to dismiss your alerts.
+ *
+ * #### Example
+ *
+ * <pre>
+<!-- Basic static alert (default bootstrap behavior) -->
+<div class="alert fade" bs-alert><strong>Hey!</strong> This is a static alert.</div>
+
+<!-- Alert bound to an object (alert.closed is set to true on close) -->
+<div class="alert fade" bs-alert="alert"></div>
+
+<!-- Use an array stack (alert is removed from the stack on close) -->
+<div class="alerts">
+<div class="alert fade" ng-repeat="alert in alerts" bs-alert="alert"></div>
+</div>
+ * </pre>
+ *
+ * @param {number|false} close-after Delay in milliseconds before automatically closing the alert or false to disable. Default: false
+ * @param {boolean} close-button Whether to display a close button or not. Default: true
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsAlert', function($parse, $timeout, $compile) {

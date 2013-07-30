@@ -1,5 +1,31 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-popover
+ * @element any
+ * @restrict A
+ * @description
+ *
+ * ### A popover widget directive based on Twitter Bootstrap
+ *
+ * Fetches an external html partial (or an inline ng-template) and populates the popover with its content.
+ *
+ * Use any button/link to trigger a popover menu by appending a bs-popover attribute.
+ *
+ * Methods $scope.show(), $scope.hide() and $scope.$popover() are available inside the popover to toggle its visibility.
+ *
+ * @param {boolean} animation Apply a CSS fade transition to the tooltip. Default: true
+ * @param {string} placement One of top, bottom, left or right. How to position the popover. Default: 'right'
+ * @param {string|false} selector If provided, tooltip objects will be delegated to this target. Default: false
+ * @param {string} trigger Popover trigger on click, hover, focus or manual. Default: 'click'
+ * @param {string} title Title value. Default: ''
+ * @param {string} content Content value. Default: ''
+ * @param {string|object} delay delay showing and hiding the popover (ms) - does not apply to manual trigger type. If a number is supplied, delay is applied to both hide/show. Default: 0
+ * @param {string|false} container Appends the popover to a specific element. Default: false
+ * @param {boolean} unique When present, will close other popovers when on is opened. Default: false
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsPopover', function($parse, $compile, $http, $timeout, $q, $templateCache) {

@@ -1,5 +1,28 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-timepicker
+ * @element input
+ * @restrict A
+ * @description
+ *
+ * ### A timepicker widget directive based on Bootstrap Timepicker.
+ *
+ * @param {string} time-type Either 'string', to output a string of format HH:MM or 'date', to output a Date object. Default : 'string'
+ * @param {string} template Either 'dropdown', to display a dropdown widget, 'modal', to use a modal window or false to hide the widget. Default : 'dropdown'
+ * @param {integer} minute-step Minute steps, that is, number of minutes added or substracted with each step. Default: 15
+ * @param {boolean} show-seconds Show seconds controls or not. Default: false
+ * @param {integer} second-step Second step, that is, number of seconds added or substracted with each step. Default: 15
+ * @param {string} default-time Sets the default value to current time ('current'), specified time (Date object) or empty (false). Default: 'current'
+ * @param {boolean} show-meridian Show AM / PM (12h mode). Default: true
+ * @param {boolean} show-inputs Show text inputs for hours, minutes and seconds. Default: true
+ * @param {string} disable-focus Not focusable. Useful for mobile devices. Default: false
+ * @param {boolean} modal-backdrop Show modal backdrop. Default : false
+ * @param {boolean} open-on-focus Force widget display property on input focus. Default : false
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsTimepicker', function($timeout, $strapConfig) {

@@ -1,5 +1,47 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name $strap.directives:bs-typeahead
+ * @element input
+ * @restrict A
+ * @description
+ *
+ * ### An autocomplete widget directive based on Twitter Bootstrap.
+ *
+ * Use any input with typeahead functionality by appending a bs-typeahead attribute.
+ *
+ * <pre>
+<input type="text" ng-model="typeaheadValue" bs-typeahead="typeahead">
+
+<!-- You can also use a function -->
+<input type="text" ng-model="typeaheadValue" bs-typeahead="typeaheadFn">
+
+<!-- Function defined in your controller -->
+$scope.typeaheadFn = function(query) {
+  return $.map($scope.typeahead, function(country) {
+    return country + '_1';
+  });
+}
+
+<!-- Async function defined in your controller -->
+$scope.typeaheadFn = function(query, callback) {
+  $http.get('/stations/autocomplete?term='+query).success(function(stations) {
+    callback(stations); // This will automatically open the popup with retrieved results
+  });
+}
+ * </pre>
+ *
+ * @param {expression} bsTypeahead Scope array or function that will feed elements.
+ * @param {number} items Max number of items to display. Default: 8
+ * @param {boolean} match-all This will bypass the matcher function. Default: false
+ * @param {number} min-length Minimal input length before displaying the typeahead.
+ * @param {expression} matcher TODO
+ * @param {expression} sorter TODO
+ * @param {expression} highlighter TODO
+ *
+ */
+
 angular.module('$strap.directives')
 
 .directive('bsTypeahead', function($parse) {
