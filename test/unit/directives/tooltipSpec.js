@@ -26,6 +26,9 @@ describe('tooltip', function () {
     },
     'click': {
       element: '<a class="btn" bs-tooltip="content" data-trigger="click" data-placement="left"></a>'
+    },
+    'string': {
+      element: '<a class="btn" bs-tooltip="\'This is a string.\'" data-unique="true" data-placement="left"></a>'
     }
   };
 
@@ -53,10 +56,16 @@ describe('tooltip', function () {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should define a correct title', function() {
+  it('should define a correct scope object title', function() {
     var elm = compileDirective();
     elm.tooltip('show');
     expect(elm.data('tooltip').tip().find('.tooltip-inner').html()).toBe(scope.content);
+  });
+
+  it('should define a correct string title', function() {
+    var elm = compileDirective('string');
+    elm.tooltip('show');
+    expect(elm.data('tooltip').tip().find('.tooltip-inner').html()).toBe('This is a string.');
   });
 
   it('should show correctly handle title update/replace', function() {
