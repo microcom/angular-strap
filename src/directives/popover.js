@@ -2,7 +2,7 @@
 
 angular.module('$strap.directives')
 
-.directive('bsPopover', function($parse, $compile, $http, $timeout, $q, $templateCache) {
+.directive('bsPopover', function($parse, $compile, $http, $timeout, $q, $templateCache, $strapConfig) {
 
   // Hide popovers when pressing esc
   $('body').on('keyup', function(ev) {
@@ -72,7 +72,7 @@ angular.module('$strap.directives')
         }
 
         // Initialize popover
-        element.popover(angular.extend({}, options, {
+        element.popover(angular.extend({}, options, $strapConfig.popover, {
           content: template,
           html: true
         }));
